@@ -12,5 +12,6 @@ namespace LecroyScopeWinForms.Scope
         Task DisconnectAsync();
         Task<string> SendCommandAsync(string command, CancellationToken cancellationToken = default);
         Task LoadSetupAsync(string setupPath, CancellationToken cancellationToken = default);
+        Task<IReadOnlyList<MeasurementResult>> CaptureAndReadMeasurementsAsync(CancellationToken cancellationToken = default);
     }
 }

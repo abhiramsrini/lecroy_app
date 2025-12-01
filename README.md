@@ -40,7 +40,8 @@ If your ActiveDSO control is only 32-bit, publish/rerun as `win-x86` and ensure 
 4) Click **Connect**; status updates in the footer of the connection box.  
 5) Enter a SCPI/command and click **Send** to write to the scope and read back the response.  
 6) Enter a scope-side setup path and click **Load** to recall that setup on the instrument (no upload support).  
-7) Activity log shows all events with timestamps.
+7) Click **Capture & Read** to trigger a single acquisition and read amplitude/frequency/rise-time for channels C1–C4; results appear in the grid.  
+8) Activity log shows all events with timestamps.
 
 ## Customizing
 

@@ -28,6 +28,15 @@ namespace LecroyScopeWinForms
         private Label setupPathLabel;
         private TextBox setupPathTextBox;
         private Button loadSetupButton;
+        private GroupBox measurementsGroupBox;
+        private Button captureButton;
+        private DataGridView measurementsGrid;
+        private Label measurementsStatusLabel;
+        private DataGridViewTextBoxColumn channelColumn;
+        private DataGridViewTextBoxColumn measurementColumn;
+        private DataGridViewTextBoxColumn valueColumn;
+        private DataGridViewTextBoxColumn unitColumn;
+        private DataGridViewTextBoxColumn timestampColumn;
 
         private void InitializeComponent()
         {
@@ -52,12 +61,23 @@ namespace LecroyScopeWinForms
             this.loadSetupButton = new Button();
             this.setupPathTextBox = new TextBox();
             this.setupPathLabel = new Label();
+            this.measurementsGroupBox = new GroupBox();
+            this.measurementsStatusLabel = new Label();
+            this.measurementsGrid = new DataGridView();
+            this.channelColumn = new DataGridViewTextBoxColumn();
+            this.measurementColumn = new DataGridViewTextBoxColumn();
+            this.valueColumn = new DataGridViewTextBoxColumn();
+            this.unitColumn = new DataGridViewTextBoxColumn();
+            this.timestampColumn = new DataGridViewTextBoxColumn();
+            this.captureButton = new Button();
             this.logGroupBox = new GroupBox();
             this.logTextBox = new RichTextBox();
             this.brandPanel.SuspendLayout();
             this.connectionGroupBox.SuspendLayout();
             this.commandGroupBox.SuspendLayout();
             this.setupGroupBox.SuspendLayout();
+            this.measurementsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.measurementsGrid)).BeginInit();
             this.logGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -285,14 +305,110 @@ namespace LecroyScopeWinForms
             this.setupPathLabel.TabIndex = 0;
             this.setupPathLabel.Text = "Setup file path on scope:";
             // 
+            // measurementsGroupBox
+            // 
+            this.measurementsGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            this.measurementsGroupBox.Controls.Add(this.measurementsStatusLabel);
+            this.measurementsGroupBox.Controls.Add(this.measurementsGrid);
+            this.measurementsGroupBox.Controls.Add(this.captureButton);
+            this.measurementsGroupBox.Location = new Point(16, 436);
+            this.measurementsGroupBox.Name = "measurementsGroupBox";
+            this.measurementsGroupBox.Size = new Size(1014, 210);
+            this.measurementsGroupBox.TabIndex = 4;
+            this.measurementsGroupBox.TabStop = false;
+            this.measurementsGroupBox.Text = "Capture & Measurements";
+            // 
+            // measurementsStatusLabel
+            // 
+            this.measurementsStatusLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.measurementsStatusLabel.Location = new Point(682, 26);
+            this.measurementsStatusLabel.Name = "measurementsStatusLabel";
+            this.measurementsStatusLabel.Size = new Size(326, 23);
+            this.measurementsStatusLabel.TabIndex = 2;
+            this.measurementsStatusLabel.Text = "Idle";
+            this.measurementsStatusLabel.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // measurementsGrid
+            // 
+            this.measurementsGrid.AllowUserToAddRows = false;
+            this.measurementsGrid.AllowUserToDeleteRows = false;
+            this.measurementsGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            this.measurementsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.measurementsGrid.Columns.AddRange(new DataGridViewColumn[] {
+            this.channelColumn,
+            this.measurementColumn,
+            this.valueColumn,
+            this.unitColumn,
+            this.timestampColumn});
+            this.measurementsGrid.Location = new Point(18, 60);
+            this.measurementsGrid.MultiSelect = false;
+            this.measurementsGrid.Name = "measurementsGrid";
+            this.measurementsGrid.ReadOnly = true;
+            this.measurementsGrid.RowHeadersVisible = false;
+            this.measurementsGrid.RowHeadersWidth = 51;
+            this.measurementsGrid.RowTemplate.Height = 29;
+            this.measurementsGrid.Size = new Size(990, 136);
+            this.measurementsGrid.TabIndex = 1;
+            // 
+            // channelColumn
+            // 
+            this.channelColumn.HeaderText = "Channel";
+            this.channelColumn.MinimumWidth = 6;
+            this.channelColumn.Name = "channelColumn";
+            this.channelColumn.ReadOnly = true;
+            this.channelColumn.Width = 90;
+            // 
+            // measurementColumn
+            // 
+            this.measurementColumn.HeaderText = "Measurement";
+            this.measurementColumn.MinimumWidth = 6;
+            this.measurementColumn.Name = "measurementColumn";
+            this.measurementColumn.ReadOnly = true;
+            this.measurementColumn.Width = 160;
+            // 
+            // valueColumn
+            // 
+            this.valueColumn.HeaderText = "Value";
+            this.valueColumn.MinimumWidth = 6;
+            this.valueColumn.Name = "valueColumn";
+            this.valueColumn.ReadOnly = true;
+            this.valueColumn.Width = 180;
+            // 
+            // unitColumn
+            // 
+            this.unitColumn.HeaderText = "Unit";
+            this.unitColumn.MinimumWidth = 6;
+            this.unitColumn.Name = "unitColumn";
+            this.unitColumn.ReadOnly = true;
+            this.unitColumn.Width = 80;
+            // 
+            // timestampColumn
+            // 
+            this.timestampColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            this.timestampColumn.HeaderText = "Timestamp";
+            this.timestampColumn.MinimumWidth = 6;
+            this.timestampColumn.Name = "timestampColumn";
+            this.timestampColumn.ReadOnly = true;
+            // 
+            // captureButton
+            // 
+            this.captureButton.Enabled = false;
+            this.captureButton.Location = new Point(18, 25);
+            this.captureButton.Name = "captureButton";
+            this.captureButton.Size = new Size(130, 29);
+            this.captureButton.TabIndex = 0;
+            this.captureButton.Text = "Capture && Read";
+            this.captureButton.UseVisualStyleBackColor = true;
+            this.captureButton.Click += new System.EventHandler(this.CaptureButton_Click);
+            // 
             // logGroupBox
             // 
             this.logGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             this.logGroupBox.Controls.Add(this.logTextBox);
-            this.logGroupBox.Location = new Point(16, 438);
+            this.logGroupBox.Location = new Point(16, 660);
             this.logGroupBox.Name = "logGroupBox";
-            this.logGroupBox.Size = new Size(1014, 214);
-            this.logGroupBox.TabIndex = 4;
+            this.logGroupBox.Size = new Size(1014, 192);
+            this.logGroupBox.TabIndex = 5;
             this.logGroupBox.TabStop = false;
             this.logGroupBox.Text = "Activity Log";
             // 
@@ -310,8 +426,9 @@ namespace LecroyScopeWinForms
             // 
             this.AutoScaleDimensions = new SizeF(8F, 20F);
             this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(1042, 672);
+            this.ClientSize = new Size(1042, 864);
             this.Controls.Add(this.setupGroupBox);
+            this.Controls.Add(this.measurementsGroupBox);
             this.Controls.Add(this.logGroupBox);
             this.Controls.Add(this.commandGroupBox);
             this.Controls.Add(this.connectionGroupBox);
@@ -328,6 +445,8 @@ namespace LecroyScopeWinForms
             this.commandGroupBox.PerformLayout();
             this.setupGroupBox.ResumeLayout(false);
             this.setupGroupBox.PerformLayout();
+            this.measurementsGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.measurementsGrid)).EndInit();
             this.logGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
         }

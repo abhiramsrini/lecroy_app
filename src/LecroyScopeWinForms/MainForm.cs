@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LecroyScopeWinForms.Scope;
@@ -131,6 +133,7 @@ namespace LecroyScopeWinForms
                 await _scopeClient.LoadSetupAsync(setupPath);
                 AppendLog("Setup loaded.");
                 responseTextBox.Text = $"Setup loaded from {setupPath}";
+                await RefreshMeasurementsAsync();
             }
             catch (Exception ex)
             {
@@ -141,6 +144,11 @@ namespace LecroyScopeWinForms
             {
                 SetBusy(false);
             }
+        }
+
+        private async void CaptureButton_Click(object sender, EventArgs e)
+        {
+            await RefreshMeasurementsAsync();
         }
 
         private async Task DisconnectClientAsync()
@@ -186,6 +194,7 @@ namespace LecroyScopeWinForms
             disconnectButton.Enabled = connected && !_isBusy;
             sendCommandButton.Enabled = connected && !_isBusy;
             loadSetupButton.Enabled = connected && !_isBusy;
+            captureButton.Enabled = connected && !_isBusy;
             scopeAddressTextBox.Enabled = !connected;
             dryRunCheckBox.Enabled = !connected;
         }
@@ -213,6 +222,49 @@ namespace LecroyScopeWinForms
             catch
             {
                 // Closing, ignore cleanup errors.
+            }
+        }
+
+        private async Task RefreshMeasurementsAsync()
+        {
+            if (_isBusy || _scopeClient == null || !_scopeClient.IsConnected)
+            {
+                return;
+            }
+
+            SetBusy(true);
+            measurementsStatusLabel.Text = "Capturing...";
+
+            try
+            {
+                var results = await _scopeClient.CaptureAndReadMeasurementsAsync();
+                PopulateMeasurements(results);
+                measurementsStatusLabel.Text = $"Last capture: {DateTime.Now:HH:mm:ss}";
+                AppendLog("Capture and measurement read completed.");
+            }
+            catch (Exception ex)
+            {
+                measurementsStatusLabel.Text = "Capture failed";
+                AppendLog($"Capture failed: {ex.Message}");
+                MessageBox.Show(this, ex.Message, "Capture failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                SetBusy(false);
+            }
+        }
+
+        private void PopulateMeasurements(IReadOnlyList<MeasurementResult> results)
+        {
+            measurementsGrid.Rows.Clear();
+            foreach (var result in results)
+            {
+                measurementsGrid.Rows.Add(
+                    result.Channel,
+                    result.Name,
+                    double.IsNaN(result.Value) ? "N/A" : result.Value.ToString("G6", CultureInfo.InvariantCulture),
+                    result.Unit,
+                    result.Timestamp.ToString("u"));
             }
         }
     }

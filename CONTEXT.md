@@ -10,8 +10,8 @@ Goal: A lightweight WinForms utility to control LeCroy oscilloscopes via ActiveD
 
 ## Current components
 
-- `MainForm` — Branding header, connection panel (address, dry-run, status, connect/disconnect), custom command sender with response view, setup loader (scope-side path), timestamped activity log. Uses `CompanyBrand` constant for easy branding.
-- `ActiveDsoClient` — Wraps ActiveDSO COM object, connect/send/disconnect; supports dry run and basic timeout/read fallback.
+- `MainForm` — Branding header, connection panel (address, dry-run, status, connect/disconnect), custom command sender with response view, setup loader (scope-side path), capture+measurement grid (amplitude/frequency/rise for C1–C4), timestamped activity log. Uses `CompanyBrand` constant for easy branding.
+- `ActiveDsoClient` — Wraps ActiveDSO COM object, connect/send/disconnect; supports dry run, setup recall, single-shot capture and measurement read (application object model), and basic timeout/read fallback.
 - `IScopeClient` — Interface for scope clients, used by UI for testability.
 
 ## Assumptions and constraints
