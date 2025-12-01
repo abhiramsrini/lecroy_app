@@ -1,6 +1,6 @@
 # Project context
 
-Goal: A lightweight WinForms utility to control LeCroy oscilloscopes via ActiveDSO. MVP covers connect/disconnect, custom command send/receive, dry-run simulation, and logging.
+Goal: A lightweight WinForms utility (Primeasure ScopeDesk) to control Teledyne LeCroy oscilloscopes via ActiveDSO. MVP covers connect/disconnect, custom command send/receive, dry-run simulation, and logging.
 
 ## Tech choices
 

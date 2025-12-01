@@ -1,6 +1,6 @@
-# LeCroy Scope Controller (WinForms)
+# Primeasure ScopeDesk (WinForms)
 
-Lightweight Windows utility to connect to LeCroy oscilloscopes via the ActiveDSO COM control. Provides connection controls, simple command send/receive, a dry-run mode for UI testing without hardware, and an activity log.
+Lightweight Windows utility to connect to Teledyne LeCroy oscilloscopes via the ActiveDSO COM control. Provides connection controls, simple command send/receive, a dry-run mode for UI testing without hardware, and an activity log.
 
 ## Prerequisites
 

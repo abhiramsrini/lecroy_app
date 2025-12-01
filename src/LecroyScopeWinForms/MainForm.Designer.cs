@@ -37,12 +37,14 @@ namespace LecroyScopeWinForms
         private DataGridViewTextBoxColumn valueColumn;
         private DataGridViewTextBoxColumn unitColumn;
         private DataGridViewTextBoxColumn timestampColumn;
+        private PictureBox logoPictureBox;
 
         private void InitializeComponent()
         {
             this.brandPanel = new Panel();
             this.companyNameLabel = new Label();
             this.appTitleLabel = new Label();
+            this.logoPictureBox = new PictureBox();
             this.connectionGroupBox = new GroupBox();
             this.scopeAddressLabel = new Label();
             this.scopeAddressTextBox = new TextBox();
@@ -73,6 +75,7 @@ namespace LecroyScopeWinForms
             this.logGroupBox = new GroupBox();
             this.logTextBox = new RichTextBox();
             this.brandPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.connectionGroupBox.SuspendLayout();
             this.commandGroupBox.SuspendLayout();
             this.setupGroupBox.SuspendLayout();
@@ -84,6 +87,7 @@ namespace LecroyScopeWinForms
             // brandPanel
             // 
             this.brandPanel.BackColor = Color.FromArgb(33, 150, 243);
+            this.brandPanel.Controls.Add(this.logoPictureBox);
             this.brandPanel.Controls.Add(this.companyNameLabel);
             this.brandPanel.Controls.Add(this.appTitleLabel);
             this.brandPanel.Dock = DockStyle.Top;
@@ -103,16 +107,26 @@ namespace LecroyScopeWinForms
             this.companyNameLabel.TabIndex = 0;
             this.companyNameLabel.Text = "Your Company";
             // 
+            // logoPictureBox
+            // 
+            this.logoPictureBox.BackColor = Color.Transparent;
+            this.logoPictureBox.Location = new Point(22, 10);
+            this.logoPictureBox.Name = "logoPictureBox";
+            this.logoPictureBox.Size = new Size(48, 48);
+            this.logoPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            this.logoPictureBox.TabIndex = 2;
+            this.logoPictureBox.TabStop = false;
+            // 
             // appTitleLabel
             // 
             this.appTitleLabel.AutoSize = true;
             this.appTitleLabel.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             this.appTitleLabel.ForeColor = Color.WhiteSmoke;
-            this.appTitleLabel.Location = new Point(24, 40);
+            this.appTitleLabel.Location = new Point(80, 32);
             this.appTitleLabel.Name = "appTitleLabel";
             this.appTitleLabel.Size = new Size(196, 23);
             this.appTitleLabel.TabIndex = 1;
-            this.appTitleLabel.Text = "LeCroy Scope Controller";
+            this.appTitleLabel.Text = "Primeasure ScopeDesk";
             // 
             // connectionGroupBox
             // 
@@ -448,6 +462,7 @@ namespace LecroyScopeWinForms
             this.measurementsGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.measurementsGrid)).EndInit();
             this.logGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
         }
     }

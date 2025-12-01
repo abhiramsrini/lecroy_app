@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LecroyScopeWinForms.Scope;
@@ -9,7 +11,7 @@ namespace LecroyScopeWinForms
 {
     public partial class MainForm : Form
     {
-        private const string CompanyBrand = "Your Company";
+        private const string CompanyBrand = "Primeasure";
         private IScopeClient? _scopeClient;
         private bool _isBusy;
 
@@ -17,6 +19,8 @@ namespace LecroyScopeWinForms
         {
             InitializeComponent();
             companyNameLabel.Text = CompanyBrand;
+            companyNameLabel.Visible = false;
+            LoadLogo();
             scopeAddressTextBox.Text = "192.168.0.10";
             UpdateUiState();
         }
@@ -265,6 +269,30 @@ namespace LecroyScopeWinForms
                     double.IsNaN(result.Value) ? "N/A" : result.Value.ToString("G6", CultureInfo.InvariantCulture),
                     result.Unit,
                     result.Timestamp.ToString("u"));
+            }
+        }
+
+        private void LoadLogo()
+        {
+            try
+            {
+                var logoPath = Path.Combine(AppContext.BaseDirectory, "images", "logo.png");
+                if (File.Exists(logoPath))
+                {
+                    logoPictureBox.Image = Image.FromFile(logoPath);
+                    logoPictureBox.Visible = true;
+                }
+                else
+                {
+                    logoPictureBox.Visible = false;
+                    companyNameLabel.Visible = true;
+                }
+            }
+            catch
+            {
+                // If loading fails, fall back to text branding.
+                logoPictureBox.Visible = false;
+                companyNameLabel.Visible = true;
             }
         }
     }

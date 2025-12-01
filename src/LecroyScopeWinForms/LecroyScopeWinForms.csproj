@@ -9,4 +9,10 @@
     <Prefer32Bit>true</Prefer32Bit>
     <RootNamespace>LecroyScopeWinForms</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="images\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
