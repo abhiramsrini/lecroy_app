@@ -120,7 +120,7 @@ namespace LecroyScopeWinForms.Scope
 
             await Task.Run(() =>
             {
-                _scope.WriteString($"""app.SaveRecall.Setup.PanelFilename = "{setupPath}"""");
+                _scope.WriteString($"app.SaveRecall.Setup.PanelFilename = \"{setupPath}\"");
                 try
                 {
                     _scope.WriteString("app.SaveRecall.Setup.DoRecallPanel", true);
@@ -212,9 +212,9 @@ namespace LecroyScopeWinForms.Scope
             // Configure P1/P2/P3 per channel to AMPL/FREQ/RISE respectively.
             for (var ch = 1; ch <= 4; ch++)
             {
-                _scope.WriteString($"""app.Measure.C{ch}.P1.ParamEngine = "AMPL"""" );
-                _scope.WriteString($"""app.Measure.C{ch}.P2.ParamEngine = "FREQ"""" );
-                _scope.WriteString($"""app.Measure.C{ch}.P3.ParamEngine = "RISE"""" );
+                _scope.WriteString($"app.Measure.C{ch}.P1.ParamEngine = \"AMPL\"");
+                _scope.WriteString($"app.Measure.C{ch}.P2.ParamEngine = \"FREQ\"");
+                _scope.WriteString($"app.Measure.C{ch}.P3.ParamEngine = \"RISE\"");
             }
 
             _measurementsConfigured = true;
@@ -277,7 +277,7 @@ namespace LecroyScopeWinForms.Scope
                     Channel = $"C{ch}",
                     Name = "Amplitude",
                     Unit = "V",
-                    Value = ReadDouble($"""app.Measure.C{ch}.P1.Out.Result.Value""" ),
+                    Value = ReadDouble($"app.Measure.C{ch}.P1.Out.Result.Value"),
                     Timestamp = now
                 });
                 results.Add(new MeasurementResult
@@ -285,7 +285,7 @@ namespace LecroyScopeWinForms.Scope
                     Channel = $"C{ch}",
                     Name = "Frequency",
                     Unit = "Hz",
-                    Value = ReadDouble($"""app.Measure.C{ch}.P2.Out.Result.Value""" ),
+                    Value = ReadDouble($"app.Measure.C{ch}.P2.Out.Result.Value"),
                     Timestamp = now
                 });
                 results.Add(new MeasurementResult
@@ -293,7 +293,7 @@ namespace LecroyScopeWinForms.Scope
                     Channel = $"C{ch}",
                     Name = "Rise Time",
                     Unit = "s",
-                    Value = ReadDouble($"""app.Measure.C{ch}.P3.Out.Result.Value""" ),
+                    Value = ReadDouble($"app.Measure.C{ch}.P3.Out.Result.Value"),
                     Timestamp = now
                 });
             }
