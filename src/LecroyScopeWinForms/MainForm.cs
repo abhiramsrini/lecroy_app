@@ -110,6 +110,39 @@ namespace LecroyScopeWinForms
             }
         }
 
+        private async void LoadSetupButton_Click(object sender, EventArgs e)
+        {
+            if (_isBusy || _scopeClient == null || !_scopeClient.IsConnected)
+            {
+                return;
+            }
+
+            var setupPath = setupPathTextBox.Text.Trim();
+            if (string.IsNullOrWhiteSpace(setupPath))
+            {
+                MessageBox.Show(this, "Enter the setup file path on the scope.", "Setup path required", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            SetBusy(true);
+            AppendLog($"Loading setup: {setupPath}");
+            try
+            {
+                await _scopeClient.LoadSetupAsync(setupPath);
+                AppendLog("Setup loaded.");
+                responseTextBox.Text = $"Setup loaded from {setupPath}";
+            }
+            catch (Exception ex)
+            {
+                AppendLog($"Load setup failed: {ex.Message}");
+                MessageBox.Show(this, ex.Message, "Load setup failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                SetBusy(false);
+            }
+        }
+
         private async Task DisconnectClientAsync()
         {
             if (_scopeClient == null)
@@ -152,6 +185,7 @@ namespace LecroyScopeWinForms
             connectButton.Enabled = !connected && !_isBusy;
             disconnectButton.Enabled = connected && !_isBusy;
             sendCommandButton.Enabled = connected && !_isBusy;
+            loadSetupButton.Enabled = connected && !_isBusy;
             scopeAddressTextBox.Enabled = !connected;
             dryRunCheckBox.Enabled = !connected;
         }

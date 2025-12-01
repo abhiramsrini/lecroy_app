@@ -24,6 +24,10 @@ namespace LecroyScopeWinForms
         private RichTextBox responseTextBox;
         private GroupBox logGroupBox;
         private RichTextBox logTextBox;
+        private GroupBox setupGroupBox;
+        private Label setupPathLabel;
+        private TextBox setupPathTextBox;
+        private Button loadSetupButton;
 
         private void InitializeComponent()
         {
@@ -44,11 +48,16 @@ namespace LecroyScopeWinForms
             this.sendCommandButton = new Button();
             this.responseLabel = new Label();
             this.responseTextBox = new RichTextBox();
+            this.setupGroupBox = new GroupBox();
+            this.loadSetupButton = new Button();
+            this.setupPathTextBox = new TextBox();
+            this.setupPathLabel = new Label();
             this.logGroupBox = new GroupBox();
             this.logTextBox = new RichTextBox();
             this.brandPanel.SuspendLayout();
             this.connectionGroupBox.SuspendLayout();
             this.commandGroupBox.SuspendLayout();
+            this.setupGroupBox.SuspendLayout();
             this.logGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -233,14 +242,57 @@ namespace LecroyScopeWinForms
             this.responseTextBox.TabIndex = 4;
             this.responseTextBox.Text = "";
             // 
+            // setupGroupBox
+            // 
+            this.setupGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            this.setupGroupBox.Controls.Add(this.loadSetupButton);
+            this.setupGroupBox.Controls.Add(this.setupPathTextBox);
+            this.setupGroupBox.Controls.Add(this.setupPathLabel);
+            this.setupGroupBox.Location = new Point(16, 316);
+            this.setupGroupBox.Name = "setupGroupBox";
+            this.setupGroupBox.Size = new Size(1014, 106);
+            this.setupGroupBox.TabIndex = 3;
+            this.setupGroupBox.TabStop = false;
+            this.setupGroupBox.Text = "Load Setup";
+            // 
+            // loadSetupButton
+            // 
+            this.loadSetupButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.loadSetupButton.Enabled = false;
+            this.loadSetupButton.Location = new Point(900, 56);
+            this.loadSetupButton.Name = "loadSetupButton";
+            this.loadSetupButton.Size = new Size(108, 29);
+            this.loadSetupButton.TabIndex = 2;
+            this.loadSetupButton.Text = "Load";
+            this.loadSetupButton.UseVisualStyleBackColor = true;
+            this.loadSetupButton.Click += new System.EventHandler(this.LoadSetupButton_Click);
+            // 
+            // setupPathTextBox
+            // 
+            this.setupPathTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            this.setupPathTextBox.Location = new Point(20, 58);
+            this.setupPathTextBox.Name = "setupPathTextBox";
+            this.setupPathTextBox.PlaceholderText = "e.g., D:\\\\Setups\\\\MySetup.lss";
+            this.setupPathTextBox.Size = new Size(862, 27);
+            this.setupPathTextBox.TabIndex = 1;
+            // 
+            // setupPathLabel
+            // 
+            this.setupPathLabel.AutoSize = true;
+            this.setupPathLabel.Location = new Point(20, 35);
+            this.setupPathLabel.Name = "setupPathLabel";
+            this.setupPathLabel.Size = new Size(170, 20);
+            this.setupPathLabel.TabIndex = 0;
+            this.setupPathLabel.Text = "Setup file path on scope:";
+            // 
             // logGroupBox
             // 
             this.logGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             this.logGroupBox.Controls.Add(this.logTextBox);
-            this.logGroupBox.Location = new Point(16, 316);
+            this.logGroupBox.Location = new Point(16, 438);
             this.logGroupBox.Name = "logGroupBox";
-            this.logGroupBox.Size = new Size(1014, 330);
-            this.logGroupBox.TabIndex = 3;
+            this.logGroupBox.Size = new Size(1014, 214);
+            this.logGroupBox.TabIndex = 4;
             this.logGroupBox.TabStop = false;
             this.logGroupBox.Text = "Activity Log";
             // 
@@ -258,7 +310,8 @@ namespace LecroyScopeWinForms
             // 
             this.AutoScaleDimensions = new SizeF(8F, 20F);
             this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(1042, 664);
+            this.ClientSize = new Size(1042, 672);
+            this.Controls.Add(this.setupGroupBox);
             this.Controls.Add(this.logGroupBox);
             this.Controls.Add(this.commandGroupBox);
             this.Controls.Add(this.connectionGroupBox);
@@ -273,6 +326,8 @@ namespace LecroyScopeWinForms
             this.connectionGroupBox.PerformLayout();
             this.commandGroupBox.ResumeLayout(false);
             this.commandGroupBox.PerformLayout();
+            this.setupGroupBox.ResumeLayout(false);
+            this.setupGroupBox.PerformLayout();
             this.logGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
         }

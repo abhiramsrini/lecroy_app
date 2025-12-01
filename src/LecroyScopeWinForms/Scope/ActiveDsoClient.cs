@@ -97,6 +97,38 @@ namespace LecroyScopeWinForms.Scope
             }, cancellationToken).ConfigureAwait(false);
         }
 
+        public async Task LoadSetupAsync(string setupPath, CancellationToken cancellationToken = default)
+        {
+            if (!_connected)
+            {
+                throw new InvalidOperationException("Connect to the scope before loading a setup.");
+            }
+
+            if (string.IsNullOrWhiteSpace(setupPath))
+            {
+                throw new ArgumentException("Setup path is required.", nameof(setupPath));
+            }
+
+            if (_dryRun)
+            {
+                await Task.Delay(100, cancellationToken).ConfigureAwait(false);
+                return;
+            }
+
+            await Task.Run(() =>
+            {
+                _scope.WriteString($"""app.SaveRecall.Setup.PanelFilename = "{setupPath}"""");
+                try
+                {
+                    _scope.WriteString("app.SaveRecall.Setup.DoRecallPanel", true);
+                }
+                catch
+                {
+                    _scope.WriteString("app.SaveRecall.Setup.DoRecallPanel");
+                }
+            }, cancellationToken).ConfigureAwait(false);
+        }
+
         public async Task DisconnectAsync()
         {
             if (!_connected)
